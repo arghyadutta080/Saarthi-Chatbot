@@ -6,6 +6,9 @@ const getResponse = asyncErrorHandler(
     async (req, res, next) => {
 
         const { user } = req.body;
+
+        // push this message into message collection, sender = user
+        
         if (!user) {
             return next(new ErrorHandler("Ask something to get a response", 404))
         }
@@ -13,6 +16,8 @@ const getResponse = asyncErrorHandler(
         const response = await getApiResponse(user);
 
         console.log(response);
+
+        // push this message into message collection, sender = bot
 
         res.status(200).json({
             user: response

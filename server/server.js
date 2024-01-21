@@ -3,6 +3,9 @@ import dotenv from 'dotenv';
 import cors from 'cors'
 import { chatRouter } from './routes/chatRoute.js';
 import { errorMiddleware } from './middlewares/errorHandler.js';
+import cookieParser from 'cookie-parser';
+import { connectDB } from './middlewares/db.js';
+import { userRouter } from './routes/userRoute.js';
 
 const app = express();
 dotenv.config()
@@ -13,13 +16,17 @@ app.get('/', (req, res) => {
 
 // middlewares
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors({
     origin: true,
     credentials: true
 }))
 
+connectDB();
+
 // routing middlewares
 app.use(chatRouter);
+app.use(userRouter);
 
 // error middleware
 app.use(errorMiddleware);

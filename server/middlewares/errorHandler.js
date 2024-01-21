@@ -3,6 +3,7 @@ const errorMiddleware = async (err, req, res, next) => {
     err.statuscode = err.statuscode || 500
 
     res.status(err.statuscode).json({
+        success: false,
         message: err.message,
         err: err.stack
     })
