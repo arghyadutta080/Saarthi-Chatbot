@@ -1,8 +1,11 @@
-const App = () => {
+import React from "react"
+import AuthPage from "./pages/AuthPage"
+
+const App:React.FC = () => {
 
   return (
     <>
-      Welcome to chatterbot
+      <AuthPage/>
     </>
   )
 }
