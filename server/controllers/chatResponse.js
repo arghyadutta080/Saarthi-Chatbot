@@ -16,17 +16,22 @@ const getResponse = asyncErrorHandler(
             return next(new ErrorHandler("Ask something to get a response", 404));
         }
 
-        const msg = new messageModel({          // sender = user
-            senderId: req.user._id,
-            content: userMsg
-        })
-        await msg.save();
-
         const response = await getApiResponse(userMsg);     // OpenAI generated response
 
         if (!response) {
             return next(new ErrorHandler("Response not found. Try again later", 500));
         }
+
+        res.status(200).json({
+            success: true,
+            response
+        })
+
+        const msg = new messageModel({          // sender = user
+            senderId: req.user._id,
+            content: userMsg
+        })
+        await msg.save();
 
         const reply = new messageModel({        // receiver = user
             receiverId: req.user._id,
@@ -34,11 +39,6 @@ const getResponse = asyncErrorHandler(
             replyOf: msg        // storing the reference of user message
         })
         await reply.save();
-
-        res.status(200).json({
-            success: true,
-            response
-        })
     }
 )
 
