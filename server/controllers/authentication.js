@@ -16,13 +16,13 @@ const registration = asyncErrorHandler(async (req, res, next) => {
                 newUser.save();
                 generateCookies(newUser, res);
             } else {
-                return next(new ErrorHandler("Password and Confirm Password should be same", 400))
+                return next(new ErrorHandler("Password and Confirm Password should be same", 400));
             }
         } else {
-            return next(new ErrorHandler("All fields are mandatory", 400))
+            return next(new ErrorHandler("All fields are mandatory", 400));
         }
     } else {
-        return next(new ErrorHandler("User already exists", 400))
+        return next(new ErrorHandler("User already exists", 400));
     }
 })
 
@@ -30,19 +30,19 @@ const registration = asyncErrorHandler(async (req, res, next) => {
 const login = asyncErrorHandler(async (req, res, next) => {
     const { username, password } = req.body;
     if (username && password) {
-        const user = await userModel.findOne({ $or: [{ email: username }, { username: username }] })
+        const user = await userModel.findOne({ $or: [{ email: username }, { username: username }] });
         if (user) {
             const matchPassword = await bcrypt.compare(password, user.password);
             if (matchPassword) {
                 generateCookies(user, res)
             } else {
-                return next(new ErrorHandler("Wrong Email or Password", 404))
+                return next(new ErrorHandler("Wrong Email or Password", 404));
             }
         } else {
-            return next(new ErrorHandler("Wrong Email or Password", 404))
+            return next(new ErrorHandler("Wrong Email or Password", 404));
         }
     } else {
-        return next(new ErrorHandler('All fields are mandatory', 400))
+        return next(new ErrorHandler('All fields are mandatory', 400));
     }
 })
 

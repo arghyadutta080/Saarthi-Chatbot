@@ -1,30 +1,64 @@
 import asyncErrorHandler from "../middlewares/asyncErrorHandler.js";
+import { messageModel } from "../models/message.js";
 import { ErrorHandler } from "../utils/customError.js";
 import { getApiResponse } from "../utils/openAI.js";
 
 const getResponse = asyncErrorHandler(
     async (req, res, next) => {
 
-        const { user } = req.body;
-
-        // push this message into message collection, sender = user
-        
-        if (!user) {
-            return next(new ErrorHandler("Ask something to get a response", 404))
+        if (!req.user) {        // req.user is received from authenticate middleware 
+            return next(new ErrorHandler("Login First", 401));
         }
 
-        const response = await getApiResponse(user);
+        const { userMsg } = req.body;
 
-        console.log(response);
+        if (!userMsg) {
+            return next(new ErrorHandler("Ask something to get a response", 404));
+        }
 
-        // push this message into message collection, sender = bot
+        const msg = new messageModel({          // sender = user
+            senderId: req.user._id,
+            content: userMsg
+        })
+        await msg.save();
+
+        const response = await getApiResponse(userMsg);     // OpenAI generated response
+
+        if (!response) {
+            return next(new ErrorHandler("Response not found. Try again later", 500));
+        }
+
+        const reply = new messageModel({        // receiver = user
+            receiverId: req.user._id,
+            content: response,
+            replyOf: msg        // storing the reference of user message
+        })
+        await reply.save();
 
         res.status(200).json({
-            user: response
+            success: true,
+            response
         })
-        console.log(user);
-
     }
 )
 
-export { getResponse }
+const getChat = asyncErrorHandler(
+    async (req, res, next) => {
+        if (!req.user) {        // req.user is received from authenticate middleware 
+            return next(new ErrorHandler("Login First", 401));
+        }
+
+        const chat = await messageModel.find({ receiverId: req.user._id }).populate('replyOf');
+
+        if(!chat) {
+            return next(new ErrorHandler("Chat not found, create some chat first", 404));
+        }
+
+        res.status(200).json({
+            success: true,
+            chat
+        })
+    }
+)
+
+export { getResponse, getChat }
