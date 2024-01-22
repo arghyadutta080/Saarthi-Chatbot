@@ -22,13 +22,13 @@ app.use(cors({
     credentials: true
 }))
 
-connectDB();
+connectDB();    // connecting Database
 
 // routing middlewares
 app.use(chatRouter);
 app.use(userRouter);
 
-// error middleware
+// error handling middleware
 app.use(errorMiddleware);
 
 const port = process.env.PORT
