@@ -14,6 +14,7 @@ const registration = asyncErrorHandler(async (req, res, next) => {
                 const hashedPassword = await bcrypt.hash(password, 10);
                 const newUser = new userModel({ username, email, password: hashedPassword });
                 newUser.save();
+                const msg = "You have successfully registered yourself"
                 generateCookies(newUser, res);
             } else {
                 return next(new ErrorHandler("Password and Confirm Password should be same", 400));
@@ -34,12 +35,13 @@ const login = asyncErrorHandler(async (req, res, next) => {
         if (user) {
             const matchPassword = await bcrypt.compare(password, user.password);
             if (matchPassword) {
-                generateCookies(user, res)
+                const msg = "You have successfully Logged In yourelf"
+                generateCookies(user, msg, res)
             } else {
-                return next(new ErrorHandler("Wrong Email or Password", 404));
+                return next(new ErrorHandler("Wrong User-ID or Password", 404));
             }
         } else {
-            return next(new ErrorHandler("Wrong Email or Password", 404));
+            return next(new ErrorHandler("Wrong User-ID or Password", 404));
         }
     } else {
         return next(new ErrorHandler('All fields are mandatory', 400));
@@ -49,7 +51,7 @@ const login = asyncErrorHandler(async (req, res, next) => {
 
 const profile = asyncErrorHandler(async (req, res, next) => {
     if (!req.user) {
-        return next(new ErrorHandler("Login First", 404));
+        return next(new ErrorHandler("Profile not found!", 404));
     }
     return res.status(201).json({
         success: true,

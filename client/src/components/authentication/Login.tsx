@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   FormControl,
   FormLabel,
@@ -6,22 +6,56 @@ import {
   VStack,
   Button,
   FormHelperText,
+  useToast,
 } from "@chakra-ui/react";
-
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const Login: React.FC = () => {
   const [userId, setUserId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const toast = useToast();
+  const navigate = useNavigate();
+
+  const context = useContext(AuthContext);
+  const setIsAuthenticated = context.setIsAuthenticated;
+
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("submit");
+    axios
+      .post(
+        "http://localhost:5000/auth/login",
+        { username: userId, password },
+        { withCredentials: true }
+      )
+      .then((response) => {
+        toast({
+          title: "Authentication Successful",
+          description: response.data.message,
+          status: "success",
+          position: "top",
+          duration: 2000,
+          isClosable: true,
+        });
+        setIsAuthenticated(true);
+        navigate("/");
+      })
+      .catch((error) => {
+        toast({
+          title: "Login failed!",
+          description: error.response.data.message,
+          status: "error",
+          position: "top",
+          duration: 2000,
+          isClosable: true,
+        });
+      });
   };
 
   const submitButtonState = () => {
-    if (
-      userId !== "" && password !== ""
-    ) {
+    if (userId !== "" && password !== "") {
       return false;
     } else {
       return true;

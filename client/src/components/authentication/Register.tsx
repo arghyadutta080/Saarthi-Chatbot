@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   FormControl,
   FormLabel,
@@ -6,9 +6,12 @@ import {
   VStack,
   Button,
   FormHelperText,
+  useToast,
 } from "@chakra-ui/react";
 import { emailError, passwordError } from "../../utils/validators";
-
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const Register: React.FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -16,18 +19,55 @@ const Register: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 
+  const toast = useToast();
+  const navigate = useNavigate();
+
+  const context = useContext(AuthContext);
+  const setIsAuthenticated = context.setIsAuthenticated;
+
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("submit")
+    axios
+      .post(
+        "http://localhost:5000/auth/register",
+        { username, email, password, confirmPassword },
+        { withCredentials: true }
+      )
+      .then((response) => {
+        toast({
+          title: "Account created.",
+          description: response.data.message,
+          status: "success",
+          position: "top",
+          duration: 2000,
+          isClosable: true,
+        });
+        setIsAuthenticated(true);
+        navigate("/");
+      })
+      .catch((error) => {
+        toast({
+          title: "Registration failed!",
+          description: error.response.data.message,
+          status: "error",
+          position: "top",
+          duration: 1000,
+          isClosable: true,
+        });
+      });
   };
 
   const submitButtonState = () => {
-    if (!emailError(email) && !passwordError(password, confirmPassword) && username !== "") {
-        return false;
+    if (
+      !emailError(email) &&
+      !passwordError(password, confirmPassword) &&
+      username !== ""
+    ) {
+      return false;
     } else {
-        return true;
+      return true;
     }
-  }
+  };
 
   return (
     <form onSubmit={(e) => submitHandler(e)}>

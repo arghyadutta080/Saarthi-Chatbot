@@ -7,7 +7,7 @@ const authenticate = asyncErrorHandler(async (req, res, next) => {
     if (!token) {
         return res.status(403).json({
             success: false,
-            message: "user is not authenticated"
+            message: "User is not Logged In"
         })
     }
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
