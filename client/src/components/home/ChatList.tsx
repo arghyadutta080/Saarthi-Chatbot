@@ -145,11 +145,14 @@ const ChatList: React.FC<Props> = ({profilePic}) => {
         </Box>
       </Flex>
       <VStack mb={{ base: 10, lg: 24 }} w={"100%"}>
+        
+        {/* get all past chats */}
         {chat.map((element, index) => {
           return (
             <ChatItem key={index} chat={element} profilePic={profilePic} />
           );
         })}
+
         {displayMsg ? (
           <Flex w={"100%"} direction={"column"}>
             {/* User Message */}
