@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Box,
   Flex,
@@ -13,8 +13,24 @@ import {
 import Login from "../components/authentication/Login";
 import Register from "../components/authentication/Register";
 import bgImg from "../assets/bg_img.png";
+import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const AuthPage: React.FC = () => {
+  const context = useContext(AuthContext);
+  const {isAuthenticated} = context;
+
+  const navigate = useNavigate();
+
+  useEffect(() => { 
+    setTimeout(() => {
+      if (isAuthenticated) {
+        console.log("Inside useEffect: Authpage", isAuthenticated);
+        navigate("/");
+      }
+    }, 100)
+  }, [isAuthenticated]);
+
   return (
     <>
       <HStack
@@ -37,7 +53,7 @@ const AuthPage: React.FC = () => {
           align={{ base: "center", lg: "start" }}
           my={{ base: 5, lg: 0 }}
         >
-          <Box fontSize={{ base: 40, md: 50, lg: 70 }}>Chatter-Bot</Box>
+          <Box fontSize={{ base: 40, md: 50, lg: 70 }}>Saarthi 🤖</Box>
           <Box fontSize={{ base: 20, md: 30, lg: 40 }}>
             An OpenAI powered ChatBot
           </Box>

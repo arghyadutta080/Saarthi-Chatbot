@@ -23,6 +23,7 @@ const AuthState: React.FC<AuthStateProps> = (props) => {
         console.log(response.data);
         setUser(response.data.user);
         setIsAuthenticated(response.data.success);
+        console.log("Inside context API", user, isAuthenticated);
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -35,7 +36,7 @@ const AuthState: React.FC<AuthStateProps> = (props) => {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, setIsAuthenticated, user, setUser }}
+      value={{ isAuthenticated, setIsAuthenticated, user, setUser, checkAuthState }}
     >
       {props.children}
     </AuthContext.Provider>

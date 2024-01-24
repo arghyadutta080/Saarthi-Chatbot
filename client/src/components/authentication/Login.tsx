@@ -20,7 +20,7 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
 
   const context = useContext(AuthContext);
-  const setIsAuthenticated = context.setIsAuthenticated;
+  const { setIsAuthenticated, checkAuthState } = context;
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,7 +30,7 @@ const Login: React.FC = () => {
         { username: userId, password },
         { withCredentials: true }
       )
-      .then((response) => {
+      .then(async (response) => {
         toast({
           title: "Authentication Successful",
           description: response.data.message,
@@ -39,7 +39,8 @@ const Login: React.FC = () => {
           duration: 2000,
           isClosable: true,
         });
-        setIsAuthenticated(true);
+        await checkAuthState(); // Always run a chechAuth() function after successfully Logged In
+        setIsAuthenticated(true)
         navigate("/");
       })
       .catch((error) => {

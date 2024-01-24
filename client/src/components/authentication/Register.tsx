@@ -23,7 +23,7 @@ const Register: React.FC = () => {
   const navigate = useNavigate();
 
   const context = useContext(AuthContext);
-  const setIsAuthenticated = context.setIsAuthenticated;
+  const { checkAuthState } = context;
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,7 +33,7 @@ const Register: React.FC = () => {
         { username, email, password, confirmPassword },
         { withCredentials: true }
       )
-      .then((response) => {
+      .then(async (response) => {
         toast({
           title: "Account created.",
           description: response.data.message,
@@ -42,7 +42,7 @@ const Register: React.FC = () => {
           duration: 2000,
           isClosable: true,
         });
-        setIsAuthenticated(true);
+        await checkAuthState(); // Always run a chechAuth() function after successfully Logged In
         navigate("/");
       })
       .catch((error) => {
