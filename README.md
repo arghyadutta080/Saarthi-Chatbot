@@ -25,13 +25,14 @@ To run this project locally, follow these steps:
 1. **Clone the repository:**
 
     ```bash
-    https://github.com/arghyadutta080/Chatbo
+    git clone https://github.com/arghyadutta080/Chatbot.git
     cd chatbot
     ```
+2. **Open the `chatbot` directory in your Code-Editor (In my case it's VS-Code)**
 
-2. **Split the terminal**
+3. **Open the terminal in your Code-Editor and split it into two terminals**
    
-3. **In first terminal move to the server directory:**
+3. **In the first terminal move to the server directory:**
    
     ```bash
     cd server
@@ -43,11 +44,11 @@ To run this project locally, follow these steps:
     npm install
     ```
     
-5. **Create a `.env` file at the root of `server` directory with the following content:**
+5. **Create a `.env` file at the root of the `server` directory with the following content:**
    
     ```env
     PORT=5000
-    OPENAI_API_KEY=your-openai-api-key
+    OPENAI_API_KEY=<your-openai-api-key>
     MONGODB_URL=mongodb+srv://arghyadutta080:BLg3fLjlakhRjn3q@cluster0.o6nftlo.mongodb.net/
     JWT_SECRET=jhihiutvieuwvievnuoigonhooger
     ```
@@ -58,7 +59,7 @@ To run this project locally, follow these steps:
     npm run start
     ```
 
-5. **In second terminal move to the `client` directory:**
+5. **In the second terminal move to the `client` directory:**
 
     ```bash
     cd client
