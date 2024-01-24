@@ -34,6 +34,7 @@ const Register: React.FC = () => {
         { withCredentials: true }
       )
       .then(async (response) => {
+        console.log(response)
         toast({
           title: "Account created.",
           description: response.data.message,

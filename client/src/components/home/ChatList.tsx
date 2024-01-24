@@ -1,4 +1,16 @@
-import { Box, Flex, HStack, Image, Input, VStack, useToast } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Circle,
+  Flex,
+  HStack,
+  Icon,
+  Image,
+  Input,
+  VStack,
+  useToast,
+} from "@chakra-ui/react";
+import { IconButton } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
 import ChatItem from "./ChatItem";
 import { AuthContext } from "../../context/AuthContext";
@@ -36,9 +48,9 @@ const ChatList: React.FC = () => {
   const scrollToBottom = () => {
     window.scrollTo({
       top: document.body.scrollHeight,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
-    }
+  };
 
   const getChat = () => {
     axios
@@ -56,19 +68,24 @@ const ChatList: React.FC = () => {
 
   const getAnswer = () => {
     console.log("Inside function");
-    setDisplayMsg(true); 
-    scrollToBottom();
+    if(question !== ""){
+      setDisplayMsg(true);
+      scrollToBottom();
+    }
     axios
-    .post(
-      "http://localhost:5000/api/chat",
-      { userMsg: question },
-      { withCredentials: true }
+      .post(
+        "http://localhost:5000/api/chat",
+        { userMsg: question },
+        { withCredentials: true }
       )
       .then((response) => {
-        setQuestion(""); 
-        console.log(response)
+        setQuestion("");
+        console.log(response);
         setDisplayMsg(false);
-        setChat([...chat, {content: response.data.response, replyOf: { content: question}}])
+        setChat([
+          ...chat,
+          { content: response.data.response, replyOf: { content: question } },
+        ]);
         scrollToBottom();
       })
       .catch((error) => {
@@ -82,9 +99,7 @@ const ChatList: React.FC = () => {
           isClosable: true,
         });
       });
-      
   };
-
 
   const navigate = useNavigate();
 
@@ -96,17 +111,17 @@ const ChatList: React.FC = () => {
     getChat();
   }, [isAuthenticated]);
 
-  
-
   const custom_ans = `Hey ${user?.username} this is your Saarathi 👋 \nI am a Chatbot powered by OpenAI. Tell me how can ihelp you?`;
 
   return (
     <VStack
-      minH={"100vh"}
+      minH={"90vh"}
       w={{ base: "95%", lg: "85%" }}
       spacing={3}
       py={5}
       mt={{ base: 10, lg: 20 }}
+      border={"2px"}
+      borderColor={"red.500"}
     >
       <Flex maxW={"80%"} alignSelf={"flex-start"} direction={"row"}>
         <Image
@@ -127,14 +142,19 @@ const ChatList: React.FC = () => {
           {custom_ans}
         </Box>
       </Flex>
-      <VStack mb={{ base: 10, lg: 24 }}>
+      <VStack mb={{ base: 10, lg: 24 }} w={"100%"}>
         {chat.map((element, index) => {
           return <ChatItem key={index} chat={element} />;
         })}
         {displayMsg ? (
           <Flex w={"100%"} direction={"column"}>
             {/* User Message */}
-            <Flex maxW={"80%"} alignSelf={"flex-end"} direction={"row"} mb={3}>
+            <Flex
+              maxW={{ base: "75%", md: "80%" }}
+              alignSelf={"flex-end"}
+              direction={"row"}
+              mb={3}
+            >
               <Box
                 bgColor={"#D0FD63"}
                 px={5}
@@ -158,7 +178,7 @@ const ChatList: React.FC = () => {
 
             {/* Bot reply */}
             <Flex
-              maxW={"80%"}
+              maxW={{ base: "75%", md: "80%" }}
               alignSelf={"flex-start"}
               direction={"row"}
               alignItems={"center"}
@@ -183,8 +203,8 @@ const ChatList: React.FC = () => {
       </VStack>
       <HStack
         w={"100%"}
-        px={{ lg: 8 }}
-        py={{ lg: 3 }}
+        px={{ base: 2, lg: 8 }}
+        py={{ base: 3 }}
         overflow={"hidden"}
         position={"fixed"}
         bottom={0}
@@ -194,14 +214,14 @@ const ChatList: React.FC = () => {
         justifyContent={"center"}
       >
         <Flex
-          w={"90%"}
+          w={{ base: "%", lg: "90%" }}
           bgColor={"white"}
           borderRadius={"full"}
           alignItems={"center"}
         >
           <Image
             borderRadius="full"
-            boxSize="50px"
+            boxSize={{ base: "40px", lg: "50px" }}
             src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png"
           />{" "}
           <Input
@@ -217,7 +237,18 @@ const ChatList: React.FC = () => {
             marginRight={1}
           />
         </Flex>
-        <IoSendSharp size={50} onClick={() => getAnswer()} />
+        <Circle
+          bgColor={"white"}
+          size={{ base: 10, lg: 50 }}
+          onClick={() => getAnswer()}
+        >
+          {/* <IoSendSharp   /> */}
+          <Icon
+            as={IoSendSharp}
+            boxSize={{ base: 5, lg: 8 }}
+            color={"blueviolet"}
+          />
+        </Circle>
       </HStack>
     </VStack>
   );

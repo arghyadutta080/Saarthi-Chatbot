@@ -8,9 +8,19 @@ interface Props {
 
 const ChatItem: React.FC<Props> = (props) => {
   return (
-    <Flex w={"100%"} direction={"column"}>
+    <Flex
+      w={"100%"}
+      direction={"column"}
+      border={"2px"}
+      borderColor={"red.500"}
+    >
       {/* User Message */}
-      <Flex maxW={"80%"} alignSelf={"flex-end"} direction={"row"} mb={3}>
+      <Flex
+        maxW={{ base: "75%", md: "80%" }}
+        alignSelf={"flex-end"}
+        direction={"row"}
+        mb={3}
+      >
         <Box
           bgColor={"#D0FD63"}
           px={5}
@@ -33,7 +43,12 @@ const ChatItem: React.FC<Props> = (props) => {
       </Flex>
 
       {/* Bot reply */}
-      <Flex maxW={"80%"} alignSelf={"flex-start"} direction={"row"} mb={1}>
+      <Flex
+        maxW={{ base: "75%", md: "80%" }}
+        alignSelf={"flex-start"}
+        direction={"row"}
+        mb={1}
+      >
         <Image
           borderRadius="full"
           boxSize={{ base: "35px", lg: "50px" }}
