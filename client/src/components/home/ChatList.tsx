@@ -59,17 +59,17 @@ const ChatList: React.FC = () => {
     setDisplayMsg(true); 
     scrollToBottom();
     axios
-      .post(
-        "http://localhost:5000/api/chat",
-        { userMsg: question },
-        { withCredentials: true }
+    .post(
+      "http://localhost:5000/api/chat",
+      { userMsg: question },
+      { withCredentials: true }
       )
       .then((response) => {
+        setQuestion(""); 
         console.log(response)
         setDisplayMsg(false);
         setChat([...chat, {content: response.data.response, replyOf: { content: question}}])
         scrollToBottom();
-        setQuestion(""); 
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -89,9 +89,8 @@ const ChatList: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(isAuthenticated); // Always call a state deciding variable inside a child component of a Page
-    if (!isAuthenticated) {
-      // to avoid unnecessary navigations
+    console.log(isAuthenticated);   // Always call a state deciding variable inside a child component of a Page
+    if (!isAuthenticated) {         // to avoid unnecessary navigations
       navigate("/auth");
     }
     getChat();
@@ -103,6 +102,7 @@ const ChatList: React.FC = () => {
 
   return (
     <VStack
+      minH={"100vh"}
       w={{ base: "95%", lg: "85%" }}
       spacing={3}
       py={5}
@@ -115,7 +115,7 @@ const ChatList: React.FC = () => {
           src="https://www.shutterstock.com/image-vector/cute-chat-bot-smiling-flat-600nw-2175518705.jpg"
         />{" "}
         <Box
-          bgColor={"white"}
+          bgColor={"#FDF6A2"}
           px={5}
           py={5}
           borderRadius={8}
@@ -134,15 +134,15 @@ const ChatList: React.FC = () => {
         {displayMsg ? (
           <Flex w={"100%"} direction={"column"}>
             {/* User Message */}
-            <Flex maxW={"80%"} alignSelf={"flex-end"} direction={"row"} my={3}>
+            <Flex maxW={"80%"} alignSelf={"flex-end"} direction={"row"} mb={3}>
               <Box
-                bgColor={"white"}
+                bgColor={"#D0FD63"}
                 px={5}
                 py={3}
-                borderRadius={8}
+                borderRadius={"xl"}
                 fontSize={"small"}
                 fontWeight={"500"}
-                marginRight={0}
+                marginRight={2}
                 h={"fit-content"}
                 whiteSpace={"pre-line"}
                 alignSelf={"flex-end"}
@@ -162,7 +162,6 @@ const ChatList: React.FC = () => {
               alignSelf={"flex-start"}
               direction={"row"}
               alignItems={"center"}
-              
             >
               <Image
                 borderRadius="full"
@@ -183,30 +182,42 @@ const ChatList: React.FC = () => {
         )}
       </VStack>
       <HStack
-        w={"90%"}
+        w={"100%"}
         px={{ lg: 8 }}
         py={{ lg: 3 }}
         overflow={"hidden"}
         position={"fixed"}
         bottom={0}
-        bgColor={"#FDF6A2"}
-        borderTopRadius={20}
+        background={
+          "linear-gradient(90deg, rgba(233,29,166,1) 0%, rgba(32,118,196,1) 100%)"
+        }
+        justifyContent={"center"}
       >
-        <Image
-          borderRadius="full"
-          boxSize="50px"
-          src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png"
-        />{" "}
-        <Input
-          type="text"
-          value={question}
-          onChange={(e) => setQuestion(e.target.value)}
-          placeholder="Ask me anything ..."
-          border="2px"
-          borderColor="blue.500"
-          borderRadius={10}
-        />
-        <IoSendSharp size={30} onClick={() => getAnswer()} />
+        <Flex
+          w={"90%"}
+          bgColor={"white"}
+          borderRadius={"full"}
+          alignItems={"center"}
+        >
+          <Image
+            borderRadius="full"
+            boxSize="50px"
+            src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png"
+          />{" "}
+          <Input
+            type="text"
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            placeholder="Ask me anything ..."
+            border="2px"
+            borderColor="white"
+            borderRadius={"full"}
+            focusBorderColor="white"
+            fontWeight={500}
+            marginRight={1}
+          />
+        </Flex>
+        <IoSendSharp size={50} onClick={() => getAnswer()} />
       </HStack>
     </VStack>
   );

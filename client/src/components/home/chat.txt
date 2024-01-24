@@ -1,0 +1,55 @@
+<VStack mb={{ base: 10, lg: 24 }}>
+        {chat.map((element, index) => {
+          return <ChatItem key={index} chat={element} />;
+        })}
+        {displayMsg ? (
+          <Flex w={"100%"} direction={"column"}>
+            {/* User Message */}
+            <Flex maxW={"80%"} alignSelf={"flex-end"} direction={"row"} my={3}>
+              <Box
+                bgColor={"white"}
+                px={5}
+                py={3}
+                borderRadius={8}
+                fontSize={"small"}
+                fontWeight={"500"}
+                marginRight={0}
+                h={"fit-content"}
+                whiteSpace={"pre-line"}
+                alignSelf={"flex-end"}
+              >
+                {question}
+              </Box>
+              <Image
+                borderRadius="full"
+                boxSize={{ base: "40px", lg: "50px" }}
+                src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png"
+              />{" "}
+            </Flex>
+
+            {/* Bot reply */}
+            <Flex
+              maxW={"80%"}
+              alignSelf={"flex-start"}
+              direction={"row"}
+              alignItems={"center"}
+              
+            >
+              <Image
+                borderRadius="full"
+                boxSize={{ base: "30px", lg: "50px" }}
+                src="https://www.shutterstock.com/image-vector/cute-chat-bot-smiling-flat-600nw-2175518705.jpg"
+              />{" "}
+              <Image
+                borderRadius="3xl"
+                marginLeft={2}
+                h={10}
+                w={20}
+                src="https://media.tenor.com/NDL0Cu0TAQoAAAAM/typing-loading.gif"
+              />{" "}
+            </Flex>
+          </Flex>
+        ) : (
+          ""
+        )}
+      </VStack>

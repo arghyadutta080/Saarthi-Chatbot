@@ -10,12 +10,12 @@ const ChatItem: React.FC<Props> = (props) => {
   return (
     <Flex w={"100%"} direction={"column"}>
       {/* User Message */}
-      <Flex maxW={"80%"} alignSelf={"flex-end"} direction={"row"} my={3}>
+      <Flex maxW={"80%"} alignSelf={"flex-end"} direction={"row"} mb={3}>
         <Box
-          bgColor={"white"}
+          bgColor={"#D0FD63"}
           px={5}
           py={3}
-          borderRadius={8}
+          borderRadius={"xl"}
           fontSize={"small"}
           fontWeight={"500"}
           marginRight={2}
@@ -33,14 +33,14 @@ const ChatItem: React.FC<Props> = (props) => {
       </Flex>
 
       {/* Bot reply */}
-      <Flex maxW={"80%"} alignSelf={"flex-start"} direction={"row"}>
+      <Flex maxW={"80%"} alignSelf={"flex-start"} direction={"row"} mb={1}>
         <Image
           borderRadius="full"
           boxSize={{ base: "35px", lg: "50px" }}
           src="https://www.shutterstock.com/image-vector/cute-chat-bot-smiling-flat-600nw-2175518705.jpg"
         />{" "}
         <Box
-          bgColor={"white"}
+          bgColor={"#FDF6A2"}
           px={5}
           py={5}
           borderRadius={8}
