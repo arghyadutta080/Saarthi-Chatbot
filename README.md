@@ -26,9 +26,9 @@ To run this project locally, follow these steps:
 
     ```bash
     git clone https://github.com/arghyadutta080/Chatbot.git
-    cd chatbot
+    cd Chatbot
     ```
-2. **Open the `chatbot` directory in your Code-Editor (In my case it's VS-Code)**
+2. **Open the `Chatbot` directory in your Code-Editor (In my case it's VS-Code)**
 
 3. **Open the terminal in your Code-Editor and split it into two terminals**
    
