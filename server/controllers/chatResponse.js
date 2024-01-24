@@ -42,7 +42,7 @@ const getResponse = asyncErrorHandler(
     }
 )
 
-const getChat = asyncErrorHandler(
+const getChat = asyncErrorHandler( 
     async (req, res, next) => {
         if (!req.user) {        // req.user is received from authenticate middleware 
             return next(new ErrorHandler("Login First", 401));

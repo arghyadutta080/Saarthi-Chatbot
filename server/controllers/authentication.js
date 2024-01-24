@@ -29,9 +29,9 @@ const registration = asyncErrorHandler(async (req, res, next) => {
 
 
 const login = asyncErrorHandler(async (req, res, next) => {
-    const { username, password } = req.body;
-    if (username && password) {
-        const user = await userModel.findOne({ $or: [{ email: username }, { username: username }] });
+    const { email, password } = req.body;
+    if (email && password) {
+        const user = await userModel.findOne({ email });
         if (user) {
             const matchPassword = await bcrypt.compare(password, user.password);
             if (matchPassword) {
@@ -70,7 +70,7 @@ const logout = asyncErrorHandler(async (req, res, next) => {
     }
     return res.clearCookie('token').status(200).json({
         success: true,
-        message: "successfully Logged Out"
+        message: "You are successfully logged out from the system"
     })
 
 })

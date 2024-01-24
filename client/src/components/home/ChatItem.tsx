@@ -1,19 +1,16 @@
 import { Box, Flex, Image } from "@chakra-ui/react";
 import React from "react";
 import { ChatProps } from "./ChatList";
+import chatbot from "../../assets/chatbot.png"
 
 interface Props {
   chat: ChatProps;
+  profilePic: string
 }
 
 const ChatItem: React.FC<Props> = (props) => {
   return (
-    <Flex
-      w={"100%"}
-      direction={"column"}
-      border={"2px"}
-      borderColor={"red.500"}
-    >
+    <Flex w={"100%"} direction={"column"}>
       {/* User Message */}
       <Flex
         maxW={{ base: "75%", md: "80%" }}
@@ -37,8 +34,11 @@ const ChatItem: React.FC<Props> = (props) => {
         </Box>
         <Image
           borderRadius="full"
-          boxSize={{ base: "40px", lg: "50px" }}
-          src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png"
+          boxSize={{ base: "40px", lg: "45px" }}
+          src={
+            props.profilePic ||
+            "https://cdn-icons-png.flaticon.com/512/6596/6596121.png"
+          }
         />{" "}
       </Flex>
 
@@ -51,8 +51,8 @@ const ChatItem: React.FC<Props> = (props) => {
       >
         <Image
           borderRadius="full"
-          boxSize={{ base: "35px", lg: "50px" }}
-          src="https://www.shutterstock.com/image-vector/cute-chat-bot-smiling-flat-600nw-2175518705.jpg"
+          boxSize={{ base: "40px", lg: "55px" }}
+          src={chatbot}
         />{" "}
         <Box
           bgColor={"#FDF6A2"}

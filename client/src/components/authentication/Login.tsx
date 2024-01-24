@@ -11,9 +11,10 @@ import {
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import { emailError } from "../../utils/validators";
 
 const Login: React.FC = () => {
-  const [userId, setUserId] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const toast = useToast();
@@ -27,7 +28,7 @@ const Login: React.FC = () => {
     axios
       .post(
         "http://localhost:5000/auth/login",
-        { username: userId, password },
+        { email, password },
         { withCredentials: true }
       )
       .then(async (response) => {
@@ -56,7 +57,7 @@ const Login: React.FC = () => {
   };
 
   const submitButtonState = () => {
-    if (userId !== "" && password !== "") {
+    if (!emailError(email) && password !== "") {
       return false;
     } else {
       return true;
@@ -67,21 +68,16 @@ const Login: React.FC = () => {
     <form onSubmit={(e) => submitHandler(e)}>
       <VStack spacing={5}>
         <FormControl isRequired>
-          <FormLabel fontWeight={"bold"}>User ID</FormLabel>
+          <FormLabel fontWeight={"bold"}>Email</FormLabel>
           <Input
-            type="text"
-            value={userId}
-            onChange={(e) => setUserId(e.target.value)}
-            placeholder="Email / Username"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="example@gmail.com"
             border="2px"
             borderColor="blue.500"
             borderRadius={10}
           />
-          {userId === "" && (
-            <FormHelperText color="red.500">
-              This field is required!
-            </FormHelperText>
-          )}
+          <FormHelperText color="red.500">{emailError(email)}</FormHelperText>
         </FormControl>
 
         <FormControl isRequired>

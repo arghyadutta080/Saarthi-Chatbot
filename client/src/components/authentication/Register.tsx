@@ -23,7 +23,7 @@ const Register: React.FC = () => {
   const navigate = useNavigate();
 
   const context = useContext(AuthContext);
-  const { checkAuthState } = context;
+  const { setIsAuthenticated, checkAuthState } = context;
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,6 +44,7 @@ const Register: React.FC = () => {
           isClosable: true,
         });
         await checkAuthState(); // Always run a chechAuth() function after successfully Logged In
+        setIsAuthenticated(true)
         navigate("/");
       })
       .catch((error) => {

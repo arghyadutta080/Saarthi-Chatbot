@@ -1,6 +1,5 @@
 import {
   Box,
-  Center,
   Circle,
   Flex,
   HStack,
@@ -10,13 +9,13 @@ import {
   VStack,
   useToast,
 } from "@chakra-ui/react";
-import { IconButton } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
 import ChatItem from "./ChatItem";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { IoSendSharp } from "react-icons/io5";
+import chatbot from "../../assets/chatbot.png"
 
 export interface ChatProps {
   content: string;
@@ -35,7 +34,11 @@ export interface ChatProps {
   };
 }
 
-const ChatList: React.FC = () => {
+interface Props {
+  profilePic: string
+}
+
+const ChatList: React.FC<Props> = ({profilePic}) => {
   const context = useContext(AuthContext);
   const { user, isAuthenticated } = context;
 
@@ -111,7 +114,7 @@ const ChatList: React.FC = () => {
     getChat();
   }, [isAuthenticated]);
 
-  const custom_ans = `Hey ${user?.username} this is your Saarathi 👋 \nI am a Chatbot powered by OpenAI. Tell me how can ihelp you?`;
+  const custom_ans = `Hey ${user?.username} this is your Saarathi 👋 \nI am a Chatbot powered by OpenAI. Tell me how can I help you?`;
 
   return (
     <VStack
@@ -120,14 +123,13 @@ const ChatList: React.FC = () => {
       spacing={3}
       py={5}
       mt={{ base: 10, lg: 20 }}
-      border={"2px"}
-      borderColor={"red.500"}
     >
+      {/* welcome message by bot */}
       <Flex maxW={"80%"} alignSelf={"flex-start"} direction={"row"}>
         <Image
           borderRadius="full"
-          boxSize={{ base: "40px", lg: "50px" }}
-          src="https://www.shutterstock.com/image-vector/cute-chat-bot-smiling-flat-600nw-2175518705.jpg"
+          boxSize={{ base: "40px", lg: "55px" }}
+          src={chatbot}
         />{" "}
         <Box
           bgColor={"#FDF6A2"}
@@ -144,7 +146,9 @@ const ChatList: React.FC = () => {
       </Flex>
       <VStack mb={{ base: 10, lg: 24 }} w={"100%"}>
         {chat.map((element, index) => {
-          return <ChatItem key={index} chat={element} />;
+          return (
+            <ChatItem key={index} chat={element} profilePic={profilePic} />
+          );
         })}
         {displayMsg ? (
           <Flex w={"100%"} direction={"column"}>
@@ -172,7 +176,10 @@ const ChatList: React.FC = () => {
               <Image
                 borderRadius="full"
                 boxSize={{ base: "40px", lg: "50px" }}
-                src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png"
+                src={
+                  profilePic ||
+                  "https://cdn-icons-png.flaticon.com/512/6596/6596121.png"
+                }
               />{" "}
             </Flex>
 
@@ -185,8 +192,8 @@ const ChatList: React.FC = () => {
             >
               <Image
                 borderRadius="full"
-                boxSize={{ base: "30px", lg: "50px" }}
-                src="https://www.shutterstock.com/image-vector/cute-chat-bot-smiling-flat-600nw-2175518705.jpg"
+                boxSize={{ base: "40px", lg: "55px" }}
+                src={chatbot}
               />{" "}
               <Image
                 borderRadius="3xl"
@@ -221,8 +228,10 @@ const ChatList: React.FC = () => {
         >
           <Image
             borderRadius="full"
-            boxSize={{ base: "40px", lg: "50px" }}
-            src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png"
+            boxSize={{ base: "35px", lg: "35px" }}
+            src={profilePic}
+            ml={{ base: 2, md: 3 }}
+            my={{ base: 1, md: 2 }}
           />{" "}
           <Input
             type="text"
@@ -242,7 +251,6 @@ const ChatList: React.FC = () => {
           size={{ base: 10, lg: 50 }}
           onClick={() => getAnswer()}
         >
-          {/* <IoSendSharp   /> */}
           <Icon
             as={IoSendSharp}
             boxSize={{ base: 5, lg: 8 }}

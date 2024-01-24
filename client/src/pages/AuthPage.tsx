@@ -3,6 +3,7 @@ import {
   Box,
   Flex,
   HStack,
+  Image,
   Stack,
   Tab,
   TabList,
@@ -15,14 +16,16 @@ import Register from "../components/authentication/Register";
 import bgImg from "../assets/bg_img.png";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import chatbot from "../assets/chatbot.png"
 
 const AuthPage: React.FC = () => {
   const context = useContext(AuthContext);
-  const {isAuthenticated} = context;
+  const {isAuthenticated, checkAuthState} = context;
 
   const navigate = useNavigate();
 
   useEffect(() => { 
+    checkAuthState();
     setTimeout(() => {
       if (isAuthenticated) {
         console.log("Inside useEffect: Authpage", isAuthenticated);
@@ -53,7 +56,20 @@ const AuthPage: React.FC = () => {
           align={{ base: "center", lg: "start" }}
           my={{ base: 5, lg: 0 }}
         >
-          <Box fontSize={{ base: 40, md: 50, lg: 70 }}>Saarthi 🤖</Box>
+          <Box
+            fontSize={{ base: 40, md: 50, lg: 70 }}
+            display={"flex"}
+            flexDirection={"row"}
+            alignItems={"center"}
+          >
+            <Box>Saarthi</Box>
+            <Image
+              borderRadius="full"
+              boxSize={{ base: "60px", lg: "100px" }}
+              src={chatbot}
+              marginLeft={1}
+            />{" "}
+          </Box>
           <Box fontSize={{ base: 20, md: 30, lg: 40 }}>
             An OpenAI powered ChatBot
           </Box>
@@ -61,7 +77,7 @@ const AuthPage: React.FC = () => {
         <Stack
           w={{ base: "90%", md: "80%", lg: "30%" }}
           mb={{ base: 20, lg: 0 }}
-          mt={{ base: 5, lg:0 }}
+          mt={{ base: 5, lg: 0 }}
         >
           <Tabs
             isFitted
