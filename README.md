@@ -3,6 +3,7 @@
 Saarthi is an intelligent chatbot web application powered by the OpenAI API. It provides a seamless user experience with features such as user authentication, chat history storage, and responsiveness.
 
 ## Sample UI of Saarthi Chatbot
+
 <p align='center'>
 <img src="./UI/sample_1.png" alt="Login_page_Desktop" width="370">
 <img src="./UI/sample_2.png" alt="Chat_page_1_Desktop" width="370">
@@ -93,3 +94,10 @@ To run this project locally, follow these steps:
     ```
 
 6. **Now, You will be redirected to [localhost:3000](http://localhost:3000)**
+
+
+## Workflow of Saarthi Chatbot
+
+<p align='center'>
+<img src="./UI/chatbot_workflow.png" alt="Login_page_Desktop" width="750">
+<p>
