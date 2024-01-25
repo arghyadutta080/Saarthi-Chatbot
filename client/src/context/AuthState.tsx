@@ -15,7 +15,7 @@ interface UserInfo {
 const AuthState: React.FC<AuthStateProps> = (props) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [user, setUser] = useState<UserInfo | null>(null);
-  const [profilePic, setProfilePic] = useState<string>("");
+  // const [profilePic, setProfilePic] = useState<string>("");
 
   const checkAuthState = async () => {
     axios
@@ -31,44 +31,19 @@ const AuthState: React.FC<AuthStateProps> = (props) => {
       });
   };
 
-  const getProfilePic = async () => {
-    axios
-      .post(
-        "https://avatarapi.com/v2/api.aspx",
-        {
-          username: "Arghya",
-          password: "Arghya#19102003",
-          email: user?.email,
-        },
-        {
-          headers: {
-            "Content-Type": "text/plain",
-          },
-        }
-      )
-      .then((response) => {
-        setProfilePic(response.data.Image);
-        console.log(response.data.Image);
-      })
-      .catch((error) => {
-        console.log(error.response);
-        setProfilePic(
-          "https://cdn-icons-png.flaticon.com/512/6596/6596121.png"
-        );
-      });
-  }
-
   useEffect(() => {
-
-    async () => {
-      await checkAuthState();
-      await getProfilePic();
-    }
+    checkAuthState();
   }, []);
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, setIsAuthenticated, user, setUser, checkAuthState, getProfilePic, profilePic, setProfilePic }}
+      value={{
+        isAuthenticated,
+        setIsAuthenticated,
+        user,
+        setUser,
+        checkAuthState,
+      }}
     >
       {props.children}
     </AuthContext.Provider>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -28,9 +28,9 @@ import chatbot from "../assets/chatbot.png"
 const ChatPage: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const context = useContext(AuthContext);
-  const { user, checkAuthState, setIsAuthenticated, profilePic, setProfilePic, getProfilePic } = context;
+  const { user, checkAuthState, setIsAuthenticated } = context;
 
-  // const [profilePic, setProfilePic] = useState<string>("");
+  const [profilePic, setProfilePic] = useState<string>("");
 
   const navigate = useNavigate();
   const toast = useToast();
@@ -61,6 +61,33 @@ const ChatPage: React.FC = () => {
           duration: 2000,
           isClosable: true,
         });
+      });
+  };
+
+  const getProfilePic = async () => {
+    axios
+      .post(
+        "https://avatarapi.com/v2/api.aspx",
+        {
+          username: "Arghya",
+          password: "Arghya#19102003",
+          email: user?.email,
+        },
+        {
+          headers: {
+            "Content-Type": "text/plain",
+          },
+        }
+      )
+      .then((response) => {
+        setProfilePic(response.data.Image);
+        console.log(response.data.Image);
+      })
+      .catch((error) => {
+        console.log(error.response);
+        setProfilePic(
+          "https://cdn-icons-png.flaticon.com/512/6596/6596121.png"
+        );
       });
   };
 

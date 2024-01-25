@@ -1,6 +1,6 @@
 import {
   Box,
-  Circle,
+  Button,
   Flex,
   HStack,
   Icon,
@@ -251,9 +251,10 @@ const ChatList: React.FC<Props> = ({profilePic}) => {
             marginRight={1}
           />
         </Flex>
-        <Circle
+        <Button
           bgColor={"white"}
-          size={{ base: 10, lg: 50 }}
+          boxSize={{ base: 10, lg: 50 }}
+          borderRadius={"full"}
           onClick={() => getAnswer()}
         >
           <Icon
@@ -261,7 +262,7 @@ const ChatList: React.FC<Props> = ({profilePic}) => {
             boxSize={{ base: 5, lg: 8 }}
             color={"blueviolet"}
           />
-        </Circle>
+        </Button>
       </HStack>
     </VStack>
   );
