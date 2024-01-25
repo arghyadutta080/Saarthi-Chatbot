@@ -18,9 +18,9 @@ Saarthi is an intelligent chatbot web application powered by the OpenAI API. It 
 <img src="./UI/sample_6.png" alt="Chat_page_2_Mobile" width="230">
 <p>
 
-## Saarthi Chatbot working demo
+## Saarthi Chatbot working demo video
 
-[![Ardalis.GuardClauses on YouTube](http://img.youtube.com/vi/Jq6CQR3SC4w/0.jpg)](http://www.youtube.com/watch?v=Jq6CQR3SC4w "Improve Your Code with Ardalis.GuardClauses")
+[![Saarthi Chatbot working demo video](http://img.youtube.com/vi/Jq6CQR3SC4w/0.jpg)](http://www.youtube.com/watch?v=Jq6CQR3SC4w "Saarthi Chatbot working demo video")
 
 
 ## Features
