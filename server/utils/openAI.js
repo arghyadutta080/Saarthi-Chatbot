@@ -8,7 +8,7 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const getApiResponse = async (user) => {
     return new Promise(async (resolve, reject) => {
         const completion = await openai.chat.completions.create({
-            messages: [
+            messages: [ 
                 { "role": "user", "content": user },
             ],
             model: "gpt-3.5-turbo",

@@ -15,7 +15,7 @@ const registration = asyncErrorHandler(async (req, res, next) => {
                 const newUser = new userModel({ username, email, password: hashedPassword });
                 newUser.save();
                 const msg = "You have successfully registered yourself"
-                generateCookies(newUser,msg, res);
+                generateCookies(newUser, msg, res);
             } else {
                 return next(new ErrorHandler("Password and Confirm Password should be same", 400));
             }

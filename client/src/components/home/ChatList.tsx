@@ -145,7 +145,6 @@ const ChatList: React.FC<Props> = ({profilePic}) => {
         </Box>
       </Flex>
       <VStack mb={{ base: 10, lg: 24 }} w={"100%"}>
-        
         {/* get all past chats */}
         {chat.map((element, index) => {
           return (
@@ -232,7 +231,10 @@ const ChatList: React.FC<Props> = ({profilePic}) => {
           <Image
             borderRadius="full"
             boxSize={{ base: "35px", lg: "35px" }}
-            src={profilePic}
+            src={
+              profilePic ||
+              "https://cdn-icons-png.flaticon.com/512/6596/6596121.png"
+            }
             ml={{ base: 2, md: 3 }}
             my={{ base: 1, md: 2 }}
           />{" "}
