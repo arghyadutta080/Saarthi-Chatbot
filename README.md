@@ -2,27 +2,6 @@
 
 Saarthi is an intelligent chatbot web application powered by the OpenAI API. It provides a seamless user experience with features such as user authentication, chat history storage, and responsiveness.
 
-## Sample UI of Saarthi Chatbot
-
-<p align='center'>
-<img src="./UI/sample_1.png" alt="Login_page_Desktop" width="370">
-<img src="./UI/sample_2.png" alt="Chat_page_1_Desktop" width="370">
-<p>
-<p align='center'>
-<img src="./UI/sample_3.png" alt="Chat_page_2_Desktop" width="370">
-<img src="./UI/sample_4.png" alt="Chat_page_sidebar_Desktop" width="370">
-<p>
-<p align='center'>
-<img src="./UI/sample_5.png" alt="Login_page_Mobile" width="230">
-<img src="./UI/sample_7.png" alt="Chat_page_1_Mobile" width="230">
-<img src="./UI/sample_6.png" alt="Chat_page_2_Mobile" width="230">
-<p>
-
-## Saarthi Chatbot working demo video
-
-https://github.com/arghyadutta080/Chatbot/assets/102239340/c6d6ec0f-f5d4-40b7-ae85-3335c6541621
-
-
 ## Features
 
 - **User Authentication**: Users can sign in using their email and password.
@@ -38,6 +17,29 @@ https://github.com/arghyadutta080/Chatbot/assets/102239340/c6d6ec0f-f5d4-40b7-ae
 <a href="" target="_blank" rel="noreferrer"> <img src="https://skillicons.dev/icons?i=nodejs" alt="react" width="37" height="37"/> </a>
 <a href="" target="_blank" rel="noreferrer"> <img src="https://skillicons.dev/icons?i=express" alt="react" width="37" height="37"/> </a>
 <a href="" target="_blank" rel="noreferrer"> <img src="https://skillicons.dev/icons?i=mongodb" alt="react" width="37" height="37"/> </a>
+
+## Chatbot working demo video
+
+https://github.com/arghyadutta080/Chatbot/assets/102239340/c6d6ec0f-f5d4-40b7-ae85-3335c6541621
+
+## Workflow of Saarthi Chatbot
+
+<p align='center'>
+<img src="./UI/chatbot_workflow.png" alt="Login_page_Desktop" width="800">
+<p>
+
+## UI of the Web-App
+
+<p align='center'>
+<img src="./UI/sample_1.png" alt="Login_page_Desktop" width="370">
+<img src="./UI/sample_4.png" alt="Chat_page_sidebar_Desktop" width="370">
+<p>
+<p align='center'>
+<img src="./UI/sample_5.png" alt="Login_page_Mobile" width="200">
+<img src="./UI/sample_7.png" alt="Chat_page_1_Mobile" width="198">
+<img src="./UI/sample_6.png" alt="Chat_page_2_Mobile" width="199">
+<p>
+
 
 ## Getting Started
 
@@ -101,8 +103,7 @@ To run this project locally, follow these steps:
 6. **Now, You will be redirected to [localhost:3000](http://localhost:3000)**
 
 
-## Workflow of Saarthi Chatbot
+## Contributing
 
-<p align='center'>
-<img src="./UI/chatbot_workflow.png" alt="Login_page_Desktop" width="750">
-<p>
+Contributions to the project are welcome! To contribute, fork the repository and create a new branch for your changes. Once you have made your changes, create a pull request to merge your branch into the main repository.
+
