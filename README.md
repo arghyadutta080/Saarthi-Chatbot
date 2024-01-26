@@ -31,8 +31,8 @@ https://github.com/arghyadutta080/Chatbot/assets/102239340/c6d6ec0f-f5d4-40b7-ae
 ## UI of the Web-App
 
 <p align='center'>
-<img src="./UI/sample_1.png" alt="Login_page_Desktop" width="370">
-<img src="./UI/sample_4.png" alt="Chat_page_sidebar_Desktop" width="370">
+<img src="./UI/sample_1.png" alt="Login_page_Desktop" width="380">
+<img src="./UI/sample_4.png" alt="Chat_page_sidebar_Desktop" width="380">
 <p>
 <p align='center'>
 <img src="./UI/sample_5.png" alt="Login_page_Mobile" width="200">
