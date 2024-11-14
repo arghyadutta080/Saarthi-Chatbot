@@ -55,7 +55,7 @@ To run this project locally, follow these steps:
 
 3. **Open the terminal in your Code-Editor and split it into two terminals**
    
-3. **In the first terminal move to the server directory:**
+3. **In the first terminal move to the `server` directory:**
    
     ```bash
     cd server
