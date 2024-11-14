@@ -72,7 +72,7 @@ To run this project locally, follow these steps:
     ```env
     PORT=5000
     OPENAI_API_KEY=<your-openai-api-key>
-    MONGODB_URL=mongodb+srv://arghyadutta080:BLg3fLjlakhRjn3q@cluster0.o6nftlo.mongodb.net/
+    MONGODB_URL=<your-mongodb-url>
     JWT_SECRET=jhihiutvieuwvievnuoigonhooger
     ```
 
